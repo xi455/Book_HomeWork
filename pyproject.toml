@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "book"
+version = "0.1.0"
+description = ""
+authors = ["hung_xi mac <a3083493@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "^4.2.7"
+isort = "^5.12.0"
+black = "^23.11.0"
+ipython = "^8.18.1"
+djangorestframework = "^3.14.0"
+django-extensions = "^3.2.3"
+drf-spectacular = {extras = ["sidecar"], version = "^0.26.5"}
+djangorestframework-camel-case = "^1.4.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
