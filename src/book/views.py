@@ -1,7 +1,12 @@
 from rest_framework import viewsets
 
 from book.models import Book, Borrower, BorrowingRecord
-from book.serializers import BookSerializer, BorrowerSerializer, BorrowingRecordSerializer
+from book.serializers import (
+    BookSerializer,
+    BorrowerSerializer,
+    BorrowingRecordSerializer,
+)
+
 
 class BookViewSet(viewsets.ModelViewSet):
     queryset = Book.objects.all()

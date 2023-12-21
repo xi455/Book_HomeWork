@@ -37,16 +37,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
     # app
     "book.apps.BookConfig",
-
     # 第三方
     "django_extensions",
     "rest_framework",
     "drf_spectacular",
     "drf_spectacular_sidecar",
-    
 ]
 
 REST_FRAMEWORK = {
@@ -80,8 +77,8 @@ REST_FRAMEWORK = {
     ],
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
     # 轉成駱駝峰式命名設定
-    'JSON_UNDERSCOREIZE': {
-        'no_underscore_before_number': True,
+    "JSON_UNDERSCOREIZE": {
+        "no_underscore_before_number": True,
     },
 }
 
@@ -150,6 +147,8 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTH_USER_MODEL = "book.Borrower"
 
 
 # Internationalization

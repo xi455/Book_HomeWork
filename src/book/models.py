@@ -1,9 +1,12 @@
+from django.contrib.auth.models import AbstractUser
 from django.db import models
+
+from utils.models import BaseModel
 
 # Create your models here.
 
 
-class Book(models.Model):
+class Book(BaseModel):
     id = models.AutoField(primary_key=True)
     title = models.CharField("書名", max_length=255)
     author = models.CharField("作者", max_length=255)
@@ -35,35 +38,40 @@ class Book(models.Model):
 
     class Meta:
         verbose_name = "書本資訊"
+        verbose_name_plural = "書本資訊"
 
-class Borrower(models.Model):
-    id = models.AutoField(primary_key=True)    
-    name = models.CharField("姓名", max_length=68)
-    email = models.EmailField("電子郵件")
-    phone_number = models.CharField("電話號碼", max_length=15)
-    address = models.TextField("地址")
+
+class Borrower(BaseModel, AbstractUser):
+    phone_number = models.CharField("電話號碼", max_length=15, null=True)
+    address = models.TextField("地址", null=True)
+
+    REQUIRED_FIELDS: list = []
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.username}"
 
     class Meta:
-        verbose_name = "讀者資訊"
+        verbose_name = "讀者帳號資訊"
+        verbose_name_plural = "讀者帳號資訊"
 
 
-class BorrowingRecord(models.Model):
+class BorrowingRecord(BaseModel):
     id = models.AutoField(primary_key=True)
-    book = models.ForeignKey(        
+    book = models.ForeignKey(
         Book,
-        on_delete=models.CASCADE,        
+        on_delete=models.CASCADE,
     )
     borrower = models.ForeignKey(
-        Borrower, on_delete=models.CASCADE,        
+        Borrower,
+        on_delete=models.CASCADE,
     )
     borrow_date = models.DateField("借閱日期")
     return_date = models.DateField("預計歸還日期")
     actual_return_date = models.DateField("實際歸還日期", null=True, blank=True)
     fine_amount = models.DecimalField(
-        "罰款金額", max_digits=10, decimal_places=2, null=True, blank=True)
+        "罰款金額", max_digits=10, decimal_places=2, null=True, blank=True
+    )
 
     class Meta:
         verbose_name = "借書紀錄"
+        verbose_name_plural = "借書紀錄"
